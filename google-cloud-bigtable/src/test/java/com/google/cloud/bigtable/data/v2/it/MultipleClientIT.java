@@ -374,19 +374,29 @@ public class MultipleClientIT {
     final ExecutorService EXECUTOR = Executors.newCachedThreadPool();
     final BigtableDataClient client1 = factory.createDefault();
     readRows(client1, null);
+    print("____________#####__________##1");
+    print(generateThreadDump());
 
     final BigtableDataClient client2 = factory.createForInstance(PROJECT_ID, "bigtableio-test");
     readRows(client2, null);
+    print("____________#####__________##2");
+    print(generateThreadDump());
 
     final BigtableDataClient client3 = factory.createForInstance(PROJECT_ID, "endurance");
     readRows(client3, null);
+    print("____________#####__________##3");
+    print(generateThreadDump());
 
     final BigtableDataClient client4 = factory.createForInstance(PROJECT_ID, "lalji-test-instance");
     readRows(client4, null);
+    print("____________#####__________##4");
+    print(generateThreadDump());
 
     final BigtableDataClient client5 =
         factory.createForInstance(PROJECT_ID, "gcloud-tests-instance-0675bdc0");
     readRows(client5, null);
+    print("____________#####__________##5");
+    print(generateThreadDump());
 
     EXECUTOR.execute(
         new Runnable() {
@@ -426,7 +436,7 @@ public class MultipleClientIT {
 
     System.out.println(generateThreadDump());
 
-    System.out.println("____________#####__________");
+    System.out.println("____________#####__________ AwaitTermination");
     EXECUTOR.awaitTermination(40, TimeUnit.SECONDS);
     System.out.println(generateThreadDump());
     client1.close();
