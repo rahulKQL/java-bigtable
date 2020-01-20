@@ -72,14 +72,24 @@ public class MultipleClientIT {
   }
 
   @Test
-  @Ignore
   public void testWithOneClient() throws Exception {
     BigtableDataClient client = factory.createDefault();
+
     readRows(client, null);
+    print(generateThreadDump());
 
-    System.out.println(generateThreadDump());
+    readRows(client, null);
+    print(generateThreadDump());
 
-    batcher(client);
+    readRows(client, null);
+    print(generateThreadDump());
+
+    readRows(client, null);
+    print(generateThreadDump());
+
+    readRows(client, null);
+    print(generateThreadDump());
+    // batcher(client);
 
     client.close();
   }
@@ -370,6 +380,7 @@ public class MultipleClientIT {
   }
 
   @Test
+  @Ignore
   public void testMultipleConn() throws Exception {
     final ExecutorService EXECUTOR = Executors.newCachedThreadPool();
     final BigtableDataClient client1 = factory.createDefault();
